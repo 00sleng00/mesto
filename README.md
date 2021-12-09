@@ -16,5 +16,5 @@ Mesto -это интерактивная страница, куда можно �
 + Псевдоклассы
 
 ## Mesto
-[Ссылка на Mesto](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+[Ссылка на Mesto](https://00sleng00.github.io/mesto/)
 

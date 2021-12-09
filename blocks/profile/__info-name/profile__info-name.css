@@ -1,0 +1,13 @@
+.profile__info-name {
+   font-size: 42px;
+   font-weight: 500;
+   line-height: 94%;
+   grid-area: name;
+   margin: 0;
+}
+
+@media screen and (max-width: 425px) {
+   .profile__info-name {
+      font-size: 27px;
+   }
+}

@@ -5,11 +5,104 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./pages/index.css">
    <title>Mesto</title>
 </head>
 
-<body>
+<body class="page">
+   <header class="header">
+      <img src="./images/Header.svg" alt="Логотип Mesto" class="header__logo">
+   </header>
+
+   <main class="content">
+      <section class="profile">
+         <img src="./images/cousteau.jpg" alt="Аватарка" class="profile__avatar">
+         <div class="profile__info">
+            <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+            <p class="profile__info-job">Исследователь океана</p>
+            <button type="button" class="profile__info-edit-button"></button>
+         </div>
+         <button type="button" class="profile__info-add-button"></button>
+      </section>
+
+      <section class="element">
+         <ul class="element__list">
+            <li class="element__list-item">
+               <img src="./images/dmitry-tur.jpg" alt="Карачаевск" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Карачаевск</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+
+            <li class="element__list-item">
+               <img src="./images/ruslan-valeev.jpg" alt="Гора Эльбрус" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Гора Эльбрус</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+
+            <li class="element__list-item">
+               <img src="./images/kirill-pershin.jpg" alt="Домбай" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Домбай</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+
+            <li class="element__list-item">
+               <img src="./images/ruslan-valeev.jpg" alt="Гора Эльбрус" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Гора Эльбрус</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+
+            <li class="element__list-item">
+               <img src="./images/kirill-pershin.jpg" alt="Домбай" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Домбай</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+
+            <li class="element__list-item">
+               <img src="./images/dmitry-tur.jpg" alt="Карачаево-Черкесия" class="element__image">
+               <div class="element__block">
+                  <h2 class="element__text">Карачаево-Черкесия</h2>
+                  <button type="button" class="element__like"></button>
+               </div>
+            </li>
+         </ul>
+
+      </section>
+   </main>
+
+   <footer class="footer">
+      <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+   </footer>
+
+
+   <div class="popup">
+      <div class="popup__container">
+         <form class="popup__form" name="reprofile" method="get" action="#">
+            <h2 class="popup__heading">Редактировать профиль</h2>
+            <fieldset class="popup__input-container">
+               <input type="text" name="name" required placeholder="Имя" class="popup__field popup__input-name">
+               <input type="text" name="job" required placeholder="О себе" class="popup__field popup__input-job">
+            </fieldset>
+            <button class="popup__input-save" type="submit">Сохранить</button>
+            <button class="popup__close" type="button"></button>
+         </form>
+      </div>
+   </div>
+
+
+
+   <script src="./script/script.js"></script>
 
 </body>
+
 
 </html>

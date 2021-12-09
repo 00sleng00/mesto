@@ -2,6 +2,7 @@
    background-image: url(../../../images/close-Icon.svg);
    width: 32px;
    height: 32px;
+   background-repeat: no-repeat;
    background-color: transparent;
    background-size: contain;
    border: 0;

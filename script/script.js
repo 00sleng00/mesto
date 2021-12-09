@@ -1,7 +1,7 @@
 /*--------Кнопка лайк-------------- */
-for (let button of document.querySelectorAll(".element__like")) {
-   button.addEventListener("click", function () {
-      this.classList.toggle("element__like_active");
+for (let button of document.querySelectorAll('.element__like')) {
+   button.addEventListener('click', function () {
+      this.classList.toggle('element__like_active');
    });
 }
 
@@ -29,7 +29,7 @@ function closePopup() {
 popupOpen.addEventListener('click', openPopup);
 popupClose.addEventListener('click', closePopup);
 
-/*-------------------------------------------*/
+/*-----------------Форма--------------------------*/
 
 function formSubmitHandler(evt) {
    evt.preventDefault();

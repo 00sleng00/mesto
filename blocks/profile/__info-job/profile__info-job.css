@@ -4,16 +4,21 @@
    line-height: 100%;
    grid-area: job;
    margin: 0;
+   text-overflow: ellipsis;
+   max-width: 217px;
+   overflow: hidden;
+   white-space: nowrap;
 }
 
 @media screen and (max-width: 940px) {
    .profile__info-job {
-      text-align: center;
+      margin: 0 auto;
    }
 }
 
 @media screen and (max-width: 425px) {
    .profile__info-job {
       font-size: 14px;
+      max-width: 169px;
    }
 }

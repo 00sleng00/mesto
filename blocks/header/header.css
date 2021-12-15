@@ -18,3 +18,13 @@
       width: 100%;
    }
 }
+
+@media screen and (max-width: 425px) {
+   .header {
+      margin: 28px auto 0;
+   }
+
+   .header:after {
+      padding-top: 28px;
+   }
+}

@@ -20,7 +20,7 @@
          <div class="profile__info">
             <h1 class="profile__info-name">Жак-Ив Кусто</h1>
             <p class="profile__info-job">Исследователь океана</p>
-            <button type="button" class="profile__info-edit-button"></button>
+            <button type="button" aria-label="edit" class="profile__info-edit-button"></button>
          </div>
          <button type="button" class="profile__info-add-button"></button>
       </section>
@@ -89,12 +89,12 @@
          <form class="popup__form" name="reprofile" method="get" action="#">
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
-               <input type="text" name="name" required placeholder="Имя" maxlength="20" class="popup__field popup__input-name">
-               <input type="text" name="job" required placeholder="О себе" maxlength="30" class="popup__field popup__input-job">
+               <input type="text" name="name" required placeholder="Имя" maxlength="40" class="popup__field popup_input_name">
+               <input type="text" name="job" required placeholder="О себе" maxlength="100" class="popup__field popup_input_job">
             </fieldset>
             <button class="popup__input-save" type="submit">Сохранить</button>
-            <button class="popup__close" type="button"></button>
          </form>
+         <button class="popup__close" type="button"></button>
       </div>
    </div>
 

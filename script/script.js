@@ -1,29 +1,22 @@
-/*--------Кнопка лайк-------------- */
-for (let button of document.querySelectorAll('.element__like')) {
-   button.addEventListener('click', function () {
-      this.classList.toggle('element__like_active');
-   });
-}
-
 /*-------------Popup-----------------*/
 
 let popup = document.querySelector('.popup')
 let popupOpen = document.querySelector('.profile__info-edit-button')
 let popupClose = document.querySelector('.popup__close')
 let formElement = document.querySelector('.popup__form')
-let nameFrom = document.querySelector('h1.profile__info-name');
-let nameInput = document.querySelector('input.popup__input-name');
-let jobFrom = document.querySelector('p.profile__info-job')
-let jobInput = document.querySelector('.popup__input-job')
+let nameFrom = document.querySelector('.profile__info-name');
+let nameInput = document.querySelector('.popup_input_name');
+let jobFrom = document.querySelector('.profile__info-job')
+let jobInput = document.querySelector('.popup_input_job')
 
-function openPopup() {
+function openPopup() {// открывает popup
    jobInput.value = jobFrom.textContent;
    nameInput.value = nameFrom.textContent;
-   popup.classList.add('popup__opened');
+   popup.classList.add('popup_opened');
 }
 
-function closePopup() {
-   popup.classList.remove('popup__opened');
+function closePopup() {// Закрывает popup
+   popup.classList.remove('popup_opened');
 }
 
 popupOpen.addEventListener('click', openPopup);

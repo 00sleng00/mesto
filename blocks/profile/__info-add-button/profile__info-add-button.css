@@ -5,7 +5,6 @@
    background-image: url(../../../images/add-button.svg);
    background-repeat: no-repeat;
    background-position: 50% 50%;
-   background-size: 18px;
    border: 2px solid #fff;
    border-radius: 2px;
    margin-left: auto;
@@ -23,5 +22,11 @@
    .profile__info-add-button {
       margin: 36px auto 0;
       width: 282px;
+   }
+}
+
+@media screen and (max-width: 425px) {
+   .profile__info-add-button {
+      background-size: 16px;
    }
 }

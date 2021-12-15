@@ -6,15 +6,21 @@
    background-color: #000;
    color: #fff;
    border: 0;
+   font-size: 18px;
+   line-height: 100%;
+   font-style: 400;
+   border-radius: 2px;
 }
 
 .popup__input-save:hover {
    cursor: pointer;
-   opacity: 0.6;
+   opacity: 80%;
 }
 
 @media screen and (max-width: 425px) {
    .popup__input-save {
       height: 46px;
+      font-size: 14px;
+      margin: 40px 0 0;
    }
 }

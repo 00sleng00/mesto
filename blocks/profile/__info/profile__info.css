@@ -16,9 +16,9 @@
    }
 }
 
-
 @media screen and (max-width: 425px) {
    .profile__info {
       column-gap: 10px;
+      row-gap: 8px;
    }
 }

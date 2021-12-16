@@ -8,4 +8,15 @@
    font-size: 14px;
    font-weight: 500;
    line-height: 100%;
+   margin-bottom: 30px;
+}
+
+.popup__field:last-of-type {
+   margin: 0;
+}
+
+@media screen and (max-width: 320px) {
+   .popup__field {
+      margin-bottom: 27px;
+   }
 }

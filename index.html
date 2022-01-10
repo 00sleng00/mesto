@@ -25,57 +25,8 @@
          <button type="button" class="profile__info-add-button"></button>
       </section>
 
-      <section class="element">
-         <ul class="element__list">
-            <li class="element__list-item">
-               <img src="./images/dmitry-tur.jpg" alt="Карачаевск" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Карачаевск</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-
-            <li class="element__list-item">
-               <img src="./images/ruslan-valeev.jpg" alt="Гора Эльбрус" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Гора Эльбрус</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-
-            <li class="element__list-item">
-               <img src="./images/kirill-pershin.jpg" alt="Домбай" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Домбай</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-
-            <li class="element__list-item">
-               <img src="./images/ruslan-valeev.jpg" alt="Гора Эльбрус" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Гора Эльбрус</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-
-            <li class="element__list-item">
-               <img src="./images/kirill-pershin.jpg" alt="Домбай" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Домбай</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-
-            <li class="element__list-item">
-               <img src="./images/dmitry-tur.jpg" alt="Карачаево-Черкесия" class="element__image">
-               <div class="element__block">
-                  <h2 class="element__text">Карачаево-Черкесия</h2>
-                  <button type="button" class="element__like"></button>
-               </div>
-            </li>
-         </ul>
-
+      <section class="card">
+         <ul class="card__list"></ul>
       </section>
    </main>
 
@@ -84,13 +35,15 @@
    </footer>
 
 
-   <div class="popup">
+   <div class="popup popup_type-edit">
       <div class="popup__container">
          <form class="popup__form" name="reprofile" method="get" action="#">
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
-               <input type="text" name="name" required placeholder="Имя" maxlength="40" class="popup__field popup__field_input_name">
-               <input type="text" name="job" required placeholder="О себе" maxlength="100" class="popup__field popup__field_input_job">
+               <input type="text" name="name" required placeholder="Имя" maxlength="40"
+                  class="popup__field popup__field_input_name">
+               <input type="text" name="job" required placeholder="О себе" maxlength="100"
+                  class="popup__field popup__field_input_job">
             </fieldset>
             <button class="popup__input-save" type="submit">Сохранить</button>
          </form>
@@ -98,7 +51,32 @@
       </div>
    </div>
 
+   <div class="popup popup_type_add-card">
+      <div class="popup__container">
+         <form class="popup__form" name="reprofile" method="get" action="#">
+            <h2 class="popup__heading">Новое место</h2>
+            <fieldset class="popup__input-container">
+               <input type="text" name="name" required placeholder="Название" maxlength="40"
+                  class="popup__field popup__field_card_name">
+               <input type="link" name="job" required placeholder="Ссылка на картинку" maxlength="100"
+                  class="popup__field popup__field_card_link">
+            </fieldset>
+            <button class="popup__input-save" type="submit">Создать</button>
+         </form>
+         <button class="popup__close" type="button"></button>
+      </div>
+   </div>
 
+   <template class="card__template">
+      <li class="card__list-item">
+         <img alt="Картинка" class="card__image" src="">
+         <div class="card__block">
+            <h2 class="card__text"></h2>
+            <button type="button" class="card__delete"></button>
+            <button type="button" class="card__like"></button>
+         </div>
+      </li>
+   </template>
 
    <script src="./script/script.js"></script>
 

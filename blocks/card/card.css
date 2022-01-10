@@ -1,10 +1,10 @@
-.element {
+.card {
    margin: 50px auto 0;
    color: #000000;
 }
 
 @media screen and (max-width: 425px) {
-   .element {
+   .card {
       margin: 36px auto 0;
    }
 }

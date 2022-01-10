@@ -2,6 +2,7 @@
    background-image: url(../../../images/Trash.svg);
    background-color: transparent;
    background-repeat: no-repeat;
+   background-position: 50% 50%;
    border: none;
    position: absolute;
    right: 20px;
@@ -10,7 +11,7 @@
    height: 19px;
    z-index: 1;
    transition: all 0.1s linear;
-   
+   object-fit: cover;
 }
 
 .card__delete:hover {

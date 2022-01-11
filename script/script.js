@@ -120,8 +120,8 @@ function createCard(cardData) { // действие с карточками
    const deleteBtn = cardElement.querySelector('.card__delete');
    const likeBtn = cardElement.querySelector('.card__like');
 
-   const photoImg = photo.querySelector('.photo__img');
-   const photoCaption = photo.querySelector('.photo__caption');
+   const photoImg = photo.querySelector('.popup__photo-img');
+   const photoCaption = photo.querySelector('.popup__photo-caption');
 
 
    cardText.textContent = cardData.name

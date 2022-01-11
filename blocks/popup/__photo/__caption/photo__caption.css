@@ -1,0 +1,9 @@
+.photo__caption {
+   font-family: Inter, arial, sans-serif;
+   text-rendering: optimizeLegibility;
+   font-size: 12px;
+   line-height: 15px;
+   font-weight: 400;
+   color: #fff;
+   margin: 10px 0 0;
+}

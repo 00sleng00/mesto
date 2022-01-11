@@ -1,0 +1,7 @@
+.photo__img {
+   max-width: 75vw;
+   max-height: 75vh;
+   object-fit: contain;
+   padding: 0;
+   margin: 0;
+}

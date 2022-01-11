@@ -2,7 +2,7 @@
 
 const popup = document.querySelector('.popup_type-edit');// Поапап профиль
 const addCard = document.querySelector('.popup_type_add-card');// Попап карточек
-
+const photo = document.querySelector('.popup__photo');// Попап фото
 
 const popupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const popupClose = popup.querySelector('.popup__close');//   закрыть профиль
@@ -10,11 +10,16 @@ const popupClose = popup.querySelector('.popup__close');//   закрыть пр
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
 const popupCloseCard = addCard.querySelector('.popup__close');// закрытие карточек
 
+const photoAddButton = document.querySelector('.popup__photo-figure');// открытие фото
+const popupPhotoClose = photo.querySelector('.popup__close');// закрытие фото
 
+
+const photoImg = photo.querySelector('.photo__img');
 
 function toogleModal(modal) {// открытие попап
    jobInput.value = jobFrom.textContent;// форма профессия
    nameInput.value = nameFrom.textContent;// форма имя
+
    modal.classList.toggle('popup_opened');
 }
 
@@ -23,6 +28,9 @@ popupClose.addEventListener('click', () => toogleModal(popup));
 
 cardAddButton.addEventListener('click', () => toogleModal(addCard));
 popupCloseCard.addEventListener('click', () => toogleModal(addCard));
+
+//photoAddButton.addEventListener('click', () => toogleModal(photo));
+popupPhotoClose.addEventListener('click', () => toogleModal(photo));
 
 
 /*-----------------Форма--------------------------*/
@@ -41,7 +49,7 @@ const jobFrom = document.querySelector('.profile__info-job');
 const jobInput = document.querySelector('.popup__field_input_job');
 
 
-// Форма профиля
+// Заполнение формы профиля
 editForm.addEventListener('submit', (evt) => {
    evt.preventDefault();
 
@@ -52,7 +60,7 @@ editForm.addEventListener('submit', (evt) => {
 
 });
 
-// форма карточки
+//Заполнение формы карточки
 addCardForm.addEventListener('submit', (evt) => {
    evt.preventDefault();
 
@@ -62,8 +70,6 @@ addCardForm.addEventListener('submit', (evt) => {
    })
 
    toogleModal(addCard);
-
-
 
    evt.target.reset();
 });
@@ -100,12 +106,17 @@ const initialCards = [
 const list = document.querySelector('.card__list');
 const cardTemplate = document.querySelector('.card__template').content;
 
+
 function deleteCard(e) { //Удаление карточки
    e.target.closest('.card__list-item').remove()
 }
 
 function likeCard(e) {// поставить и удалить лайк
    e.target.classList.toggle('card__like_active')
+}
+
+function openPhoto() {
+   toogleModal(photo)
 }
 
 function createCard(cardData) { // действие с карточками
@@ -115,12 +126,14 @@ function createCard(cardData) { // действие с карточками
    const deleteBtn = cardElement.querySelector('.card__delete');
    const likeBtn = cardElement.querySelector('.card__like');
 
+
    cardText.textContent = cardData.name
    cardImage.src = cardData.link
-
+  
 
    likeBtn.addEventListener('click', likeCard);
    deleteBtn.addEventListener('click', deleteCard);
+   cardImage.addEventListener('click', openPhoto);
 
    list.prepend(cardElement);
 };

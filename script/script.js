@@ -27,7 +27,6 @@ popupClose.addEventListener('click', () => toogleModal(popup));
 cardAddButton.addEventListener('click', () => toogleModal(addCard));
 popupCloseCard.addEventListener('click', () => toogleModal(addCard));
 
-//photoAddButton.addEventListener('click', () => toogleModal(photo));
 popupPhotoClose.addEventListener('click', () => toogleModal(photo));
 
 
@@ -120,10 +119,11 @@ function createCard(cardData) { // действие с карточками
    const cardText = cardElement.querySelector('.card__text');
    const deleteBtn = cardElement.querySelector('.card__delete');
    const likeBtn = cardElement.querySelector('.card__like');
+
    const photoImg = photo.querySelector('.photo__img');
    const photoCaption = photo.querySelector('.photo__caption');
 
-   
+
    cardText.textContent = cardData.name
    cardImage.src = cardData.link
 

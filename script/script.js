@@ -2,7 +2,7 @@
 
 const popup = document.querySelector('.popup_type-edit');// Поапап профиль
 const addCard = document.querySelector('.popup_type_add-card');// Попап карточек
-const photo = document.querySelector('.popup__photo');// Попап фото
+const photo = document.querySelector('.popup_type_photo');// Попап фото
 
 const popupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const popupClose = popup.querySelector('.popup__close');//   закрыть профиль

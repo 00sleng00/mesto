@@ -126,17 +126,18 @@ function createCard(cardData) { // действие с карточками
 
    cardText.textContent = cardData.name
    cardImage.src = cardData.link
-
+   cardImage.alt = cardData.name
 
    likeBtn.addEventListener('click', likeCard);
    deleteBtn.addEventListener('click', deleteCard);
 
-   cardImage.addEventListener('click', () => {
+   cardImage.addEventListener('click', () => { // открытие попапа картинки по клику на картинку
+
       toogleModal(photo)
 
       photoImg.src = cardData.link
       photoCaption.textContent = cardData.name
-
+      photoImg.alt = cardData.name
    });
 
    list.prepend(cardElement);

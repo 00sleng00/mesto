@@ -37,13 +37,15 @@
 
    <div class="popup popup_type-edit">
       <div class="popup__container">
-         <form class="popup__form" name="reprofile" method="get" action="#">
+         <form class="popup__form" name="reprofile" method="get" action="#" novalidate>
             <h2 class="popup__heading">Редактировать профиль</h2>
             <fieldset class="popup__input-container">
-               <input type="text" name="name" required placeholder="Имя" maxlength="40"
-                  class="popup__field popup__field_input_name">
-               <input type="text" name="job" required placeholder="О себе" maxlength="100"
-                  class="popup__field popup__field_input_job">
+               <input type="text" name="name" required value placeholder="Имя" minlength="2" maxlength="40"
+                  class="popup__field popup__field_input_name" id="name-input">
+               <span class="name-input-error popup__input-error"></span>
+               <input type="text" name="job" required value placeholder="О себе" minlength="2" maxlength="200"
+                  class="popup__field popup__field_input_job" id="job-input">
+               <span class="job-input-error popup__input-error"></span>
             </fieldset>
             <button class="popup__input-save" type="submit">Сохранить</button>
          </form>
@@ -54,13 +56,15 @@
 
    <div class="popup popup_type_add-card">
       <div class="popup__container">
-         <form class="popup__form" name="reprofile" method="get" action="#">
+         <form class="popup__form" name="reprofile" method="get" action="#" novalidate>
             <h2 class="popup__heading">Новое место</h2>
             <fieldset class="popup__input-container">
-               <input type="text" name="name" required placeholder="Название" maxlength="40"
-                  class="popup__field popup__field_card_name">
-               <input type="link" name="job" required placeholder="Ссылка на картинку" maxlength="100"
-                  class="popup__field popup__field_card_link">
+               <input type="text" name="name" required value placeholder="Название" minlength="2" maxlength="30"
+                  class="popup__field popup__field_card_name" id="card-name-input">
+               <span class="card-name-input-error popup__input-error"></span>
+               <input type="url" name="link" required value placeholder="Ссылка на картинку"
+                  class="popup__field popup__field_card_link" id="card-url-input">
+               <span class="card-url-input-error popup__input-error"></span>
             </fieldset>
             <button class="popup__input-save" type="submit">Создать</button>
          </form>
@@ -89,8 +93,8 @@
       </li>
    </template>
 
-   <script src="./script/script.js"></script>
-
+   <script src="./script/index.js"></script>
+   <script src="./script/validate.js"></script>
 </body>
 
 

@@ -1,11 +1,10 @@
 /*-------------Popup-----------------*/
-
-const profilePopup = document.querySelector('.popup_type-edit');// Поапап профиль
+const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
 const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
 const photoPopup = document.querySelector('.popup_type_photo');// Попап фото
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
-const profilePopupClose = profilePopup.querySelector('.popup__close');//   закрыть профиль
+const profilePopupClose = profilePopup.querySelector('.popup__close');// закрыть профиль
 
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
 const popupCloseCard = addCardPopup.querySelector('.popup__close');// закрытие карточек
@@ -13,23 +12,53 @@ const popupCloseCard = addCardPopup.querySelector('.popup__close');// закры
 const photoAddButton = document.querySelector('.popup__photo-figure');// открытие фото
 const popupPhotoClose = photoPopup.querySelector('.popup__close');// закрытие фото
 
-
 function toggleModal(modal) {// открытие попап
    modal.classList.toggle('popup_opened');
+   document.addEventListener('keydown', closeEscape);
+   document.addEventListener('mousedown', closeOverlay);
 }
 
-profilePopupOpen.addEventListener('click', () => {
+profilePopupOpen.addEventListener('click', () => {// открыть профиль
+   clearForm(profilePopup, validationConfig);
+   toggleModal(profilePopup);
    jobInput.value = jobFrom.textContent;// форма профессия
    nameInput.value = nameFrom.textContent;// форма имя
-   toggleModal(profilePopup)
 });
-profilePopupClose.addEventListener('click', () => toggleModal(profilePopup));
 
-cardAddButton.addEventListener('click', () => toggleModal(addCardPopup));
-popupCloseCard.addEventListener('click', () => toggleModal(addCardPopup));
 
-popupPhotoClose.addEventListener('click', () => toggleModal(photoPopup));
+profilePopupClose.addEventListener('click', () => toggleModal(profilePopup));// закрыть профиль
 
+cardAddButton.addEventListener('click', () => { // открытие карточек
+   toggleModal(addCardPopup);
+   clearForm(addCardPopup, validationConfig);
+});
+popupCloseCard.addEventListener('click', () => toggleModal(addCardPopup));// закрытие карточек
+
+popupPhotoClose.addEventListener('click', () => toggleModal(photoPopup));// закрытие фото
+
+/*----------Закрытие попап по нажатию на ESC----------*/
+
+function closePopup(popup) {
+   popup.classList.remove('popup_opened');
+   document.removeEventListener('keydown', closeEscape);
+   document.removeEventListener('mousedown', closeOverlay);
+};
+
+function closeEscape(evt) {
+   if (evt.key === 'Escape') {
+      const openPopup = document.querySelector('.popup_opened');
+      closePopup(openPopup);
+   }
+};
+
+/*----------Закрытие попап по нажатию на Overlay----------*/
+
+function closeOverlay(evt) {
+   const openPopup = document.querySelector('.popup_opened');
+   if (evt.target === openPopup) {
+      closePopup(openPopup);
+   };
+};
 
 /*-----------------Форма--------------------------*/
 
@@ -114,7 +143,7 @@ function likeCard(e) {// поставить и удалить лайк
 }
 
 
-function getCard(item) { // действие с карточками 
+function getCard(item) { // действие с карточками
    const cardElement = cardTemplate.cloneNode(true);
    const cardImage = cardElement.querySelector('.card__image');
    const cardText = cardElement.querySelector('.card__text');
@@ -154,3 +183,6 @@ function createCard(cardData) {
 
 
 initialCards.forEach(createCard);
+
+
+

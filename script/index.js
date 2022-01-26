@@ -14,14 +14,14 @@ const popups = document.querySelectorAll('.popup'); // попапы
 function openPopup(popup) { 
    popup.classList.add('popup_opened');
    document.addEventListener('keydown', closePopupEscape);
-   popup.addEventListener('mousedown', popups);
-}
+   // popup.addEventListener('mousedown', popups);
+};
 
 /*----------Закрытие попап ----------*/
 
 function closePopup(popup) {
    document.removeEventListener('keydown', closePopupEscape);
-   popup.removeEventListener('mousedown', popups);
+   // popup.removeEventListener('mousedown', popups);
    popup.classList.remove('popup_opened');
 };
 
@@ -50,7 +50,7 @@ popups.forEach((popup) => { //
          closePopup(popup)
       }
       if (evt.target === openPopup) { //Закрытие попап по нажатию на Overlay
-         closePopup(openPopup);
+         closePopup(popup);
       }
    })
 });

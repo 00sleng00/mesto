@@ -14,9 +14,9 @@ const popupPhotoClose = photoPopup.querySelector('.popup__close');// закры�
 
 function toggleModal(modal) {// открытие попап
    modal.classList.toggle('popup_opened');
-   document.addEventListener('keydown', closeEscape);
-   document.addEventListener('mousedown', closeOverlay);
-}
+   document.addEventListener('keydown', closePopupEscape);
+   document.addEventListener('mousedown', closePopupOverlay);
+};
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
    clearForm(profilePopup, validationConfig);
@@ -36,15 +36,17 @@ popupCloseCard.addEventListener('click', () => toggleModal(addCardPopup));// з�
 
 popupPhotoClose.addEventListener('click', () => toggleModal(photoPopup));// закрытие фото
 
-/*----------Закрытие попап по нажатию на ESC----------*/
+/*----------Закрытие попап ----------*/
 
 function closePopup(popup) {
+   document.removeEventListener('keydown', closePopupEscape);
+   document.removeEventListener('mousedown', closePopupOverlay);
    popup.classList.remove('popup_opened');
-   document.removeEventListener('keydown', closeEscape);
-   document.removeEventListener('mousedown', closeOverlay);
 };
 
-function closeEscape(evt) {
+/*----------Закрытие попап по нажатию на ESC----------*/
+
+function closePopupEscape(evt) {
    if (evt.key === 'Escape') {
       const openPopup = document.querySelector('.popup_opened');
       closePopup(openPopup);
@@ -53,7 +55,7 @@ function closeEscape(evt) {
 
 /*----------Закрытие попап по нажатию на Overlay----------*/
 
-function closeOverlay(evt) {
+function closePopupOverlay(evt) {
    const openPopup = document.querySelector('.popup_opened');
    if (evt.target === openPopup) {
       closePopup(openPopup);

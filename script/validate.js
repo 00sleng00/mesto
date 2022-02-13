@@ -53,7 +53,7 @@ function enableValidation(validationConfig) {
       });
       setEventListeners(formElement, validationConfig);
    });
-};
+}
 
 
 //Функция блокирования кнопки "Сохранить" при проверки валидности
@@ -84,7 +84,7 @@ function clearForm(popup, validationConfig) {
       toggleButtonState(inputList, buttonElement, formElement, validationConfig);
    });
    buttonElement.disabled = true;
-};
+}
 
 enableValidation(validationConfig);
 

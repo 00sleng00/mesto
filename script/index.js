@@ -1,3 +1,6 @@
+import { FormValidator } from './FormValidator.js'
+
+
 /*-------------Popup-----------------*/
 const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
 const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
@@ -11,7 +14,7 @@ const popups = document.querySelectorAll('.popup'); // попапы
 
 /*----------Открытие попап ----------*/
 
-function openPopup(popup) { 
+function openPopup(popup) {
    popup.classList.add('popup_opened');
    document.addEventListener('keydown', closePopupEscape);
 };
@@ -39,7 +42,7 @@ cardAddButton.addEventListener('click', () => { // открытие карточ
 
 /*-----Закрытие попапов на крестик и Overlay-----*/
 
-popups.forEach((popup) => { // 
+popups.forEach((popup) => { //
    popup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup_opened')) {
          closePopup(popup)
@@ -183,8 +186,23 @@ function createCard(cardData) {
 };
 
 
+const validationConfig = {
+   formSelector: '.popup__form',
+   inputSelector: '.popup__field',
+   submitButtonSelector: '.popup__input-save',
+   inactiveButtonClass: 'popup__input-save_inactive',
+   inputErrorClass: 'popup__field_input_type_error',
+   errorClass: 'popup__input-error_active',
+};
+
+const editFormValidator = new FormValidator(validationConfig, editForm);
+const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 
 
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
+editFormValidator.clearForm();
 
 initialCards.forEach(createCard);
 

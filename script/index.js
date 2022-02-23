@@ -48,9 +48,6 @@ popups.forEach((popup) => { //
       if (evt.target.classList.contains('popup__close')) {
          closePopup(popup)
       }
-      if (evt.target === openPopup) { //Закрытие попап по нажатию на Overlay
-         closePopup(popup);
-      }
    })
 });
 
@@ -83,10 +80,13 @@ editForm.addEventListener('submit', (evt) => {
 addCardForm.addEventListener('submit', (evt) => {
    evt.preventDefault();
 
-   createCard({
+   const item = {
       name: fieldCardName.value,
       link: fieldCardLink.value
-   })
+   }
+
+   const cardElement = createCard(item);
+   list.prepend(cardElement);
 
    closePopup(addCardPopup);
 
@@ -99,14 +99,18 @@ const list = document.querySelector('.card__list');
 const cardTemplateSelector = '.card__template'
 
 
+/*----Функция создания карточки----*/
+
 function createCard(cardData) {
    const card = new Card(cardData, cardTemplateSelector);
    const cardElement = card.createCard();
-   list.prepend(cardElement);
+   return cardElement
 }
 
 
-initialCards.forEach(createCard);
-
+initialCards.forEach((item) => {
+   const cardElement = createCard(item);
+   list.prepend(cardElement);
+})
 
 

@@ -1,10 +1,11 @@
 import { FormValidator } from './FormValidator.js'
-
+import { openPopup, closePopup } from './utils.js';
+import { initialCards, validationConfig } from './constants.js'
+import { Card } from './Card.js';
 
 /*-------------Popup-----------------*/
 const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
 const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
-const photoPopup = document.querySelector('.popup_type_photo');// Попап фото
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
@@ -12,23 +13,20 @@ const photoAddButton = document.querySelector('.popup__photo-figure');// отк�
 
 const popups = document.querySelectorAll('.popup'); // попапы
 
-/*----------Открытие попап ----------*/
+const editForm = profilePopup.querySelector('.popup__form');// профиль
+const addCardForm = addCardPopup.querySelector('.popup__form');// карточки
 
-function openPopup(popup) {
-   popup.classList.add('popup_opened');
-   document.addEventListener('keydown', closePopupEscape);
-};
+const editFormValidator = new FormValidator(validationConfig, editForm);
+const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 
-/*----------Закрытие попап ----------*/
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
 
-function closePopup(popup) {
-   document.removeEventListener('keydown', closePopupEscape);
-   popup.classList.remove('popup_opened');
-};
+editFormValidator.clearForm();
 
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
-   clearForm(profilePopup, validationConfig); // валидация форм профиля
+   editFormValidator.clearForm(); // валидация форм профиля
    openPopup(profilePopup);
    jobInput.value = jobFrom.textContent;// форма профессия
    nameInput.value = nameFrom.textContent;// форма имя
@@ -37,7 +35,7 @@ profilePopupOpen.addEventListener('click', () => {// открыть профил
 
 cardAddButton.addEventListener('click', () => { // открытие карточек
    openPopup(addCardPopup);
-   clearForm(addCardPopup, validationConfig);// валидация форм карточек
+   addCardFormValidator.clearForm();// валидация форм карточек
 });
 
 /*-----Закрытие попапов на крестик и Overlay-----*/
@@ -56,19 +54,6 @@ popups.forEach((popup) => { //
    })
 });
 
-/*----------Закрытие попап по нажатию на ESC----------*/
-
-function closePopupEscape(evt) {
-   if (evt.key === 'Escape') {
-      const openPopup = document.querySelector('.popup_opened');
-      closePopup(openPopup);
-   }
-};
-
-/*-----------------Форма--------------------------*/
-
-const editForm = profilePopup.querySelector('.popup__form');// профиль
-const addCardForm = addCardPopup.querySelector('.popup__form');// карточки
 
 // заполнение формы карточек
 const fieldCardName = document.querySelector('.popup__field_card_name');
@@ -108,101 +93,18 @@ addCardForm.addEventListener('submit', (evt) => {
    evt.target.reset();
 });
 
-/*-----------------Фото-------------*/
 
-const initialCards = [
-   {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-   },
-   {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-   },
-   {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-   },
-   {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-   },
-   {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-   },
-   {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-   }
-];
 
 const list = document.querySelector('.card__list');
-const cardTemplate = document.querySelector('.card__template').content;
-
-
-function deleteCard(e) { //Удаление карточки
-   e.target.closest('.card__list-item').remove()
-}
-
-function likeCard(e) {// поставить и удалить лайк
-   e.target.classList.toggle('card__like_active')
-}
-
-
-function getCard(item) { // действие с карточками
-   const cardElement = cardTemplate.cloneNode(true);
-   const cardImage = cardElement.querySelector('.card__image');
-   const cardText = cardElement.querySelector('.card__text');
-   const deleteBtn = cardElement.querySelector('.card__delete');
-   const likeBtn = cardElement.querySelector('.card__like');
-
-   const photoImg = photoPopup.querySelector('.popup__photo-img');
-   const photoCaption = photoPopup.querySelector('.popup__photo-caption');
-
-
-   cardText.textContent = item.name
-   cardImage.src = item.link
-   cardImage.alt = item.name
-
-   likeBtn.addEventListener('click', likeCard);
-   deleteBtn.addEventListener('click', deleteCard);
-
-   cardImage.addEventListener('click', () => { // открытие попапа картинки по клику на картинку
-      openPopup(photoPopup)
-
-      photoImg.src = item.link
-      photoCaption.textContent = item.name
-      photoImg.alt = item.name
-   });
-
-   return cardElement
-}
+const cardTemplateSelector = '.card__template'
 
 
 function createCard(cardData) {
-   const cardElement = getCard(cardData)
+   const card = new Card(cardData, cardTemplateSelector);
+   const cardElement = card.createCard();
    list.prepend(cardElement);
-};
+}
 
-
-const validationConfig = {
-   formSelector: '.popup__form',
-   inputSelector: '.popup__field',
-   submitButtonSelector: '.popup__input-save',
-   inactiveButtonClass: 'popup__input-save_inactive',
-   inputErrorClass: 'popup__field_input_type_error',
-   errorClass: 'popup__input-error_active',
-};
-
-const editFormValidator = new FormValidator(validationConfig, editForm);
-const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
-
-
-editFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-
-editFormValidator.clearForm();
 
 initialCards.forEach(createCard);
 

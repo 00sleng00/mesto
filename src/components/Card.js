@@ -1,12 +1,13 @@
-import { openPopup } from './utils.js';
+import { openPopup } from '../utils.js';
 import { photoPopup, photoImg, photoCaption } from './constants.js'
 
 
 export class Card {
-   constructor(item, cardTemplateSelector) {
+   constructor(item, cardTemplateSelector, handleCardClick) {
       this._name = item.name;
       this._link = item.link;
       this._cardSelector = cardTemplateSelector;
+      this._handleCardClick = handleCardClick;
       this._template = document.querySelector(this._cardSelector).content.querySelector('.card__list-item')
    }
 
@@ -23,6 +24,7 @@ export class Card {
 
    createCard() {
       this._getCard();
+      
       this._cardImage.src = this._link;
       this._cardText.textContent = this._name;
       this._cardImage.alt = this._name;
@@ -36,11 +38,7 @@ export class Card {
       this._likeBtn.addEventListener('click', () => { this._likeCard() });
       this._deleteBtn.addEventListener('click', () => { this._deleteCard() });
       this._cardImage.addEventListener('click', () => { // открытие попапа картинки по клику на картинку
-         openPopup(photoPopup)
-
-         photoImg.src = this._link
-         photoCaption.textContent = this._name
-         photoImg.alt = this._name
+         this._handleCardClick(this._name, this._link)
       });
    }
 

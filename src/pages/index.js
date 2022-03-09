@@ -35,6 +35,16 @@ const nameInput = document.querySelector('.popup__field_input_name');
 const jobFrom = document.querySelector('.profile__info-job');
 const jobInput = document.querySelector('.popup__field_input_job');
 
+// Темплейт
+const list = document.querySelector('.card__list');
+const cardTemplateSelector = '.card__template'
+
+// заполнение формы карточек
+const fieldCardName = document.querySelector('.popup__field_card_name');
+const fieldCardLink = document.querySelector('.popup__field_card_link');
+
+const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
+
 // получаем инфо пользователя
 const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFrom });
 
@@ -49,13 +59,10 @@ const popupProfile = new PopupWithForm( profilePopup,
 
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
-
    const userDescription = userInfo.getUserInfo();
-
    editFormValidator.clearForm(); // очистка форм профиля
    nameInput.value = userDescription.name;// форма профессия
    jobInput.value = userDescription.job;// форма имя
-
    popupProfile.open()
    //popupProfile.setEventListeners()
 });
@@ -81,23 +88,12 @@ cardAddButton.addEventListener('click', () => { // открытие карточ
 });
 
 
-const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
-
-// заполнение формы карточек
-const fieldCardName = document.querySelector('.popup__field_card_name');
-const fieldCardLink = document.querySelector('.popup__field_card_link');
-
-
 //  Отарытие фото попап
 
 function handleCardClick(name, link) {
    openPopupImage.open(name, link)
    //openPopupImage.setEventListeners();
 }
-
-const list = document.querySelector('.card__list');
-const cardTemplateSelector = '.card__template'
-
 
 // константа класса реализации карточки в DOM
 const cardSection = new Section({

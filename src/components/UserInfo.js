@@ -1,11 +1,8 @@
 
-console.log('++++++++++++++');
 export default class UserInfo {
    constructor({ profileName, profileDescription }) {
       this._nameElement = profileName;
       this._jobElement = profileDescription;
-
-     console.log('---****', profileName, this._nameElement, this._jobElement);
    }
 
    getUserInfo() {
@@ -18,7 +15,6 @@ export default class UserInfo {
    }
 
    setUserInfo({ name, job }) {
-     console.log('setUserInfo', name, job);
       this._nameElement.textContent = name;
       this._jobElement.textContent = job;
    }

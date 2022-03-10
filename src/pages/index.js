@@ -45,6 +45,7 @@ const fieldCardLink = document.querySelector('.popup__field_card_link');
 
 const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
 
+
 // получаем инфо пользователя
 const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFrom });
 
@@ -90,10 +91,9 @@ cardAddButton.addEventListener('click', () => { // открытие карточ
 
 function handleCardClick(name, link) {
    openPopupImage.open(name, link)
-   openPopupImage.setEventListeners();
 }
 
-
+openPopupImage.setEventListeners();
 
 // константа класса реализации карточки в DOM
 const cardSection = new Section({

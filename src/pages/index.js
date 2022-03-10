@@ -13,9 +13,9 @@ const addCardPopup = document.querySelector('.popup_type_add-card');// Попа�
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
-const photoAddButton = document.querySelector('.popup__photo-figure');// открытие фото
+//const photoAddButton = document.querySelector('.popup__photo-figure');// открытие фото
 
-const popups = document.querySelectorAll('.popup'); // попапы
+//const popups = document.querySelectorAll('.popup'); // попапы
 
 const editForm = profilePopup.querySelector('.popup__form');// профиль
 const addCardForm = addCardPopup.querySelector('.popup__form');// карточки
@@ -50,13 +50,13 @@ const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFr
 
 /*----Заполнение формы профиля----*/
 
-const popupProfile = new PopupWithForm( profilePopup,
+const popupProfile = new PopupWithForm(profilePopup,
    (data) => {
       userInfo.setUserInfo(data);
       popupProfile.close();
    }
 )
-
+popupProfile.setEventListeners()
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
    const userDescription = userInfo.getUserInfo();
@@ -64,7 +64,6 @@ profilePopupOpen.addEventListener('click', () => {// открыть профил
    nameInput.value = userDescription.name;// форма профессия
    jobInput.value = userDescription.job;// форма имя
    popupProfile.open()
-   //popupProfile.setEventListeners()
 });
 
 /*----Заполнение формы карточки----*/
@@ -79,11 +78,10 @@ const popupAdd = new PopupWithForm(
       popupAdd.close()
    }
 )
-
+popupAdd.setEventListeners()
 
 cardAddButton.addEventListener('click', () => { // открытие карточек
    popupAdd.open();
-   //popupAdd.setEventListeners()
    addCardFormValidator.clearForm();// валидация форм карточек
 });
 
@@ -92,8 +90,10 @@ cardAddButton.addEventListener('click', () => { // открытие карточ
 
 function handleCardClick(name, link) {
    openPopupImage.open(name, link)
-   //openPopupImage.setEventListeners();
+   openPopupImage.setEventListeners();
 }
+
+
 
 // константа класса реализации карточки в DOM
 const cardSection = new Section({

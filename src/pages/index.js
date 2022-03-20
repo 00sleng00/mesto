@@ -6,6 +6,25 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import { api } from '../components/Api.js';
+
+api.getProfile()
+   .then(res => {
+      userInfo.setUserInfo(res.name, res.about)
+   })
+
+api.getInitialCards()
+   .then(cardList => {
+      cardList.forEach(data => {
+         const item = {
+            name: data.name,
+            link: data.link
+         }
+         cardSection.addItem(createCard(item))
+      })
+
+   })
+
 
 /*-------------Popup-----------------*/
 const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
@@ -53,10 +72,15 @@ const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFr
 
 const popupProfile = new PopupWithForm(profilePopup,
    (data) => {
+      api.editProfile(data)
+      // .then(res => {
+      //  console.log('res', res);
+      // })
       userInfo.setUserInfo(data);
       popupProfile.close();
    }
 )
+
 popupProfile.setEventListeners()
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
@@ -75,10 +99,15 @@ const popupAdd = new PopupWithForm(
          name: data.name,
          link: data.link
       }
-      cardSection.addItem(createCard(item))
+      api.addCard(data.name, data.link)
+         .then(res => {
+            console.log('res', res)
+         })
+      cardSection.addItem(createCard(item));
       popupAdd.close()
    }
 )
+
 popupAdd.setEventListeners()
 
 cardAddButton.addEventListener('click', () => { // открытие карточек
@@ -97,7 +126,7 @@ openPopupImage.setEventListeners();
 
 // константа класса реализации карточки в DOM
 const cardSection = new Section({
-   items: initialCards,
+   items: [],
    renderer: (item) => {
       cardSection.addItem(createCard(item))
    },

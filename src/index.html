@@ -10,7 +10,7 @@
 
 <body class="page">
    <header class="header">
-      <img src="<%=require('./images/header.svg')%>" alt="Логотип Mesto"  class="header__logo"> 
+      <img src="<%=require('./images/header.svg')%>" alt="Логотип Mesto"  class="header__logo">
    </header>
 
    <main class="content">
@@ -72,6 +72,18 @@
    </div>
 
 
+   <div class="popup popup_type_delete-confirm">
+      <div class="popup__container">
+         <form class="popup__form" name="reprofile" method="get" action="#" novalidate>
+            <h2 class="popup__heading">Вы уверены?</h2>
+            <button class="popup__input-save" type="submit">Да</button>
+         </form>
+         <button class="popup__close" type="button"></button>
+      </div>
+   </div>
+
+
+
    <div class="popup popup_type_photo">
       <figure class="popup__photo-figure">
          <button type="button" class="popup__close"></button>
@@ -88,10 +100,11 @@
             <h2 class="card__text"></h2>
             <button type="button" class="card__delete"></button>
             <button type="button" class="card__like"></button>
+            <span class="card__like-count"></span>
          </div>
       </li>
    </template>
-   
+
 </body>
 
 

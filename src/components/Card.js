@@ -20,10 +20,8 @@ export class Card {
       this._cardText = this._cardElement.querySelector('.card__text');
       this._deleteBtn = this._cardElement.querySelector('.card__delete');
       this._likeBtn = this._cardElement.querySelector('.card__like');
+     // this._delete()
 
-      if (this._ownerId !== this._userId) {
-         this._cardElement.querySelector('.card__delete').style.display = 'none'
-      };
 
       return this._cardElement
    }
@@ -34,10 +32,19 @@ export class Card {
       this._cardImage.src = this._link;
       this._cardText.textContent = this._name;
       this._cardImage.alt = this._name;
+      this._delete()
       this._setLikes()
       this._setEventListeners();
 
       return this._cardElement;
+   }
+
+
+   _delete() {
+
+      if (this._ownerId !== this._userId) {
+         this._cardElement.querySelector('.card__delete').style.display = 'none'
+      };
    }
 
    _setLikes() {

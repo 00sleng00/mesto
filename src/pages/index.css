@@ -45,6 +45,7 @@
 @import url(../blocks/popup/__photo-figure/popup__photo-figure.css);
 @import url(../blocks/popup/__photo-caption/popup__photo-caption.css);
 @import url(../blocks/popup/__photo-img/popup__photo-img.css);
+@import url(../blocks/popup/_type_delete-confirm/popup_type_delete-confirm.css);
 
 
 

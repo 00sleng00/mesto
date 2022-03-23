@@ -20,9 +20,6 @@ export class Card {
       this._cardText = this._cardElement.querySelector('.card__text');
       this._deleteBtn = this._cardElement.querySelector('.card__delete');
       this._likeBtn = this._cardElement.querySelector('.card__like');
-      this._delete()
-
-
       return this._cardElement
    }
 
@@ -32,28 +29,48 @@ export class Card {
       this._cardImage.src = this._link;
       this._cardText.textContent = this._name;
       this._cardImage.alt = this._name;
-      this._setLikes()
+      this.setLikes(this._likes);
       this._setEventListeners();
+
+      if (this._ownerId !== this._userId) {
+         this._cardElement.querySelector('.card__delete').style.display = 'none'
+      }
 
       return this._cardElement;
    }
 
+   isLike() {
+      const userHasLikedCard = this._likes.find(user => user._id === this._userId)
 
-   _delete() {
-
-      if (this._ownerId !== this._userId) {
-         this._cardElement.querySelector('.card__delete').style.display = 'none'
-      };
+      return userHasLikedCard
    }
 
-   _setLikes() {
+
+   setLikes(newLikes) {
+      this._likes = newLikes
       const likeCountsElement = this._cardElement.querySelector('.card__like-count')
       likeCountsElement.textContent = this._likes.length
+
+
+      if (this.isLike()) {
+         this._putLike()
+      } else {
+        this._removeLike()
+      }
    }
+
+
+   _putLike() {// поставить и удалить лайк
+      this._likeBtn.classList.add('card__like_active')
+   };
+
+  _removeLike() {// поставить и удалить лайк
+    this._likeBtn.classList.remove('card__like_active')
+  };
 
    _setEventListeners() {
 
-      this._likeBtn.addEventListener('click', () => { this._likeClickCard() });
+      this._likeBtn.addEventListener('click', () => { this._likeClickCard(this._id) });
       this._deleteBtn.addEventListener('click', () => { this._handleDeleteCardClick(this._id) });
       this._cardImage.addEventListener('click', () => { // открытие попапа картинки по клику на картинку
          this._handleCardClick(this._name, this._link)
@@ -61,10 +78,6 @@ export class Card {
    }
 
 
-
-   // _likeCard() {// поставить и удалить лайк
-   //    this._likeBtn.classList.toggle('card__like_active')
-   // };
 
    deleteCard() { //Удаление карточки
       this._cardElement.remove();

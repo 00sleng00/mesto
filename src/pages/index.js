@@ -65,12 +65,12 @@ const jobFrom = document.querySelector('.profile__info-job');
 const jobInput = document.querySelector('.popup__field_input_job');
 
 // Темплейт
-const list = document.querySelector('.card__list');
+//const list = document.querySelector('.card__list');
 const cardTemplateSelector = '.card__template'
 
 // заполнение формы карточек
-const fieldCardName = document.querySelector('.popup__field_card_name');
-const fieldCardLink = document.querySelector('.popup__field_card_link');
+//const fieldCardName = document.querySelector('.popup__field_card_name');
+//const fieldCardLink = document.querySelector('.popup__field_card_link');
 
 const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
 
@@ -119,7 +119,7 @@ const popupAdd = new PopupWithForm(
                likes: res.likes,
                id: res._id,
                userId: userId,
-              ownerId: res.owner._id
+               ownerId: res.owner._id
             }
             cardSection.addItem(createCard(item));
             popupAdd.close()
@@ -169,11 +169,23 @@ function createCard(cardData) {
                })
          })
       },
-      () => {
-         console.log('like!');
+      (id) => {
+         if (card.isLike()) {
+            api.deleteLike(id)
+               .then(res => {
+                  card.setLikes(res.likes)
+               });
+         } else {
+            api.addLike(id)
+               .then(res => {
+                  card.setLikes(res.likes)
+               });
+         }
+
       },
    );
    const cardElement = card.createCard();
+
    return cardElement
 }
 

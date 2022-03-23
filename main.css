@@ -45,4 +45,5 @@
 .popup__photo-figure{display:flex;flex-direction:column;margin:auto;position:fixed}
 .popup__photo-caption{text-rendering:optimizeLegibility;color:#fff;font-size:12px;font-weight:400;line-height:15px;margin:10px 0 0}
 .popup__photo-img{margin:0;max-height:75vh;max-width:75vw;-o-object-fit:contain;object-fit:contain;padding:0}
+.popup__input-save{margin:0}.popup__heading{padding-bottom:38px}
 

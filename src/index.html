@@ -10,12 +10,14 @@
 
 <body class="page">
    <header class="header">
-      <img src="<%=require('./images/header.svg')%>" alt="Логотип Mesto"  class="header__logo">
+      <img src="<%=require('./images/header.svg')%>" alt="Логотип Mesto" class="header__logo">
    </header>
 
    <main class="content">
       <section class="profile">
+         <div class="profile__icon" type="button" aria-label="Сменить_аватар">
          <img src="<%=require('./images/cousteau.jpg')%>" alt="Аватарка" class="profile__avatar">
+      </div>
          <div class="profile__info">
             <h1 class="profile__info-name"></h1>
             <p class="profile__info-job"></p>
@@ -71,6 +73,22 @@
       </div>
    </div>
 
+   <div class="popup popup__avatar">
+      <div class="popup__container">
+         <form class="popup__form popup__form_avatar" name="reprofile" method="get" action="URL" novalidate>
+            <h2 class="popup__heading">Обновить аватар</h2>
+            <fieldset class="popup__input-container">
+               <input type="url" name="avatar" required value placeholder="Ссылка на картинку"
+                  class="popup__field popup__input_type_avatar" id="card-url-input">
+               <span class="card-url-input-error popup__input-error"></span>
+            </fieldset>
+            <button class="popup__input-save" type="submit">Сохранить</button>
+         </form>
+         <button class="popup__close" type="button"></button>
+      </div>
+   </div>
+
+
 
    <div class="popup popup_type_delete-confirm">
       <div class="popup__container">
@@ -99,8 +117,10 @@
          <div class="card__block">
             <h2 class="card__text"></h2>
             <button type="button" class="card__delete"></button>
-            <button type="button" class="card__like"></button>
-            <span class="card__like-count"></span>
+            <div class="card__element-container">
+               <button type="button" class="card__like"></button>
+               <span class="card__like-count"></span>
+            </div>
          </div>
       </li>
    </template>

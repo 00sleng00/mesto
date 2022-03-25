@@ -13,9 +13,10 @@ let userId
 api.getProfile()
    .then(res => {
       userInfo.setUserInfo(res.name, res.about)
-
+      userInfo.setAvatar(res.avatar)
       userId = res._id
    })
+
 
 api.getInitialCards()
    .then(cardList => {
@@ -38,20 +39,22 @@ api.getInitialCards()
 const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
 const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
 const deleteConfirmPopup = document.querySelector('.popup_type_delete-confirm'); // Попап подтверждение удаления
+const popupAvatar = document.querySelector('.popup__avatar');
+
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
 
-
-//const popups = document.querySelectorAll('.popup'); // попапы
-
 const editForm = profilePopup.querySelector('.popup__form');// профиль
 const addCardForm = addCardPopup.querySelector('.popup__form');// карточки
-//const confirmPopupForm = confirmPopup.querySelector('.popup__form');
+const formEditAvatar = popupAvatar.querySelector('.popup__form');
 
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
+const avatarFormValidator = new FormValidator(validationConfig, formEditAvatar);
 
+
+avatarFormValidator.enableValidation();
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
@@ -65,37 +68,34 @@ const jobFrom = document.querySelector('.profile__info-job');
 const jobInput = document.querySelector('.popup__field_input_job');
 
 // Темплейт
-//const list = document.querySelector('.card__list');
 const cardTemplateSelector = '.card__template'
-
-// заполнение формы карточек
-//const fieldCardName = document.querySelector('.popup__field_card_name');
-//const fieldCardLink = document.querySelector('.popup__field_card_link');
-
 const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
 
+const avatarProfile = document.querySelector('.profile__avatar')
 
 // получаем инфо пользователя
-const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFrom });
+const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFrom, placeAvatarInput: avatarProfile });
 
-
+const avatarButton = document.querySelector('.profile__icon')
 
 /*----Заполнение формы профиля----*/
-
 const popupProfile = new PopupWithForm(profilePopup,
    (data) => {
+     popupProfile.renderLoading(true)
       const { name, job } = data
       api.editProfile(name, job)
          .then(res => {
             userInfo.setUserInfo(name, job);
             popupProfile.close();
          })
+        .catch(console.log)
+        .finally(() => {
+          popupTypeAvatar.renderLoading(false)
+        })
    }
 )
 
 popupProfile.setEventListeners()
-
-
 
 profilePopupOpen.addEventListener('click', () => {// открыть профиль
    const userDescription = userInfo.getUserInfo();
@@ -103,14 +103,15 @@ profilePopupOpen.addEventListener('click', () => {// открыть профил
    nameInput.value = userDescription.name;// форма профессия
    jobInput.value = userDescription.job;// форма имя
    popupProfile.open()
-});
 
+});
 
 
 /*----Заполнение формы карточки----*/
 const popupAdd = new PopupWithForm(
    addCardPopup,
    (data) => {
+     popupAdd.renderLoading(true)
       api.addCard(data.name, data.link)
          .then(res => {
             const item = {
@@ -124,6 +125,10 @@ const popupAdd = new PopupWithForm(
             cardSection.addItem(createCard(item));
             popupAdd.close()
          })
+        .catch(console.log)
+        .finally(() => {
+          popupAdd.renderLoading(false)
+        })
    }
 )
 
@@ -141,7 +146,7 @@ cardAddButton.addEventListener('click', () => { // открытие карточ
 
 openPopupImage.setEventListeners();
 
-// константа класса реализации карточки в DOM
+//константа класса реализации карточки в DOM
 const cardSection = new Section({
    items: [],
    renderer: (item) => {
@@ -150,6 +155,28 @@ const cardSection = new Section({
 },
    '.card__list')
 
+
+// ! Аватарка
+const popupTypeAvatar = new PopupWithForm(popupAvatar,
+   (avatar) => {
+      popupTypeAvatar.renderLoading(true)
+      api.editAvatar(avatar)
+         .then(res => {
+            userInfo.setAvatar(res.avatar)
+            popupTypeAvatar.close()
+         })
+         .catch(console.log)
+         .finally(() => {
+            popupTypeAvatar.renderLoading(false)
+         })
+   })
+
+popupTypeAvatar.setEventListeners()
+
+avatarButton.addEventListener('click', () => {
+   avatarFormValidator.clearForm();
+   popupTypeAvatar.open()
+});
 
 
 //  Функция создания карточки

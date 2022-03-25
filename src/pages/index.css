@@ -11,6 +11,8 @@
 @import url(../blocks/profile/__info-job/profile__info-job.css);
 @import url(../blocks/profile/__info-name/profile__info-name.css);
 @import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__icon/profile__icon.css);
+
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__block/card__block.css);
 @import url(../blocks/card/__image/card__image.css);
@@ -20,6 +22,8 @@
 @import url(../blocks/card/__list/card__list.css);
 @import url(../blocks/card/__text/card__text.css);
 @import url(../blocks/card/__delete/card__delete.css);
+@import url(../blocks/card/__element-container/card__element-container.css);
+@import url(../blocks/card/__like-count/card__like-count.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

@@ -1,0 +1,4 @@
+.card__element-container {
+   display: flex;
+   flex-direction: column;
+}

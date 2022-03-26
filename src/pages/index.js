@@ -7,16 +7,16 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import UserInfo from '../components/UserInfo.js'
-import {Api} from "../components/Api";
+import { Api } from "../components/Api";
 
 let userId
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
-  headers: {
-    authorization: '21f71f02-2b30-453e-b34c-930853c71700',
-    'Content-Type': 'application/json'
-  }
+   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
+   headers: {
+      authorization: '21f71f02-2b30-453e-b34c-930853c71700',
+      'Content-Type': 'application/json'
+   }
 })
 
 
@@ -27,24 +27,24 @@ const getUserInfo = api.getProfile()
 const getCards = api.getInitialCards()
 
 Promise.all([getUserInfo, getCards])
-  .then(([userData, cards]) => {
-    userInfo.setUserInfo(userData.name, userData.about)
-    userInfo.setAvatar(userData.avatar)
-    userId = userData._id
+   .then(([userData, cards]) => {
+      userInfo.setUserInfo(userData.name, userData.about)
+      userInfo.setAvatar(userData.avatar)
+      userId = userData._id
 
-    cards.forEach(data => {
-      const item = {
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: userId,
-        ownerId: data.owner._id
-      }
-      cardSection.addInitialCards(createCard(item))
-    })
-  })
-  .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
+      cards.forEach(data => {
+         const item = {
+            name: data.name,
+            link: data.link,
+            likes: data.likes,
+            id: data._id,
+            userId: userId,
+            ownerId: data.owner._id
+         }
+         cardSection.addInitialCards(createCard(item))
+      })
+   })
+   .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
 
 
 /*-------------Popup-----------------*/
@@ -102,7 +102,7 @@ const popupProfile = new PopupWithForm(profilePopupSelector,
             userInfo.setUserInfo(name, job);
             popupProfile.close();
          })
-        .catch(err => console.log(`Ошибка сохранения: ${err}`))
+         .catch(err => console.log(`Ошибка сохранения: ${err}`))
          .finally(() => {
             popupTypeAvatar.renderLoading(false)
          })
@@ -139,7 +139,7 @@ const popupAdd = new PopupWithForm(
             cardSection.addItem(createCard(item));
             popupAdd.close()
          })
-        .catch(err => console.log(`Ошибка сохранения: ${err}`))
+         .catch(err => console.log(`Ошибка сохранения: ${err}`))
          .finally(() => {
             popupAdd.renderLoading(false)
          })
@@ -179,7 +179,7 @@ const popupTypeAvatar = new PopupWithForm(popupAvatarSelector,
             userInfo.setAvatar(res.avatar)
             popupTypeAvatar.close()
          })
-        .catch(err => console.log(`Ошибка сохранения аватарки: ${err}`))
+         .catch(err => console.log(`Ошибка сохранения аватарки: ${err}`))
          .finally(() => {
             popupTypeAvatar.renderLoading(false)
          })
@@ -208,7 +208,7 @@ function createCard(cardData) {
                   card.deleteCard()
                   confirmPopup.close()
                })
-              .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
+               .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
          })
       },
       (id) => {
@@ -217,13 +217,13 @@ function createCard(cardData) {
                .then(res => {
                   card.setLikes(res.likes)
                })
-         .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
+               .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
          } else {
             api.addLike(id)
                .then(res => {
                   card.setLikes(res.likes)
                })
-         .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
+               .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
          }
 
       },

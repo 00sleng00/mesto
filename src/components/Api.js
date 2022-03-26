@@ -5,27 +5,27 @@ export class Api {
       // тело конструктора
    }
 
-  _checkRequest(res) {
-    if (res.ok) {
-      return res.json()
-    }
-    else {
-      return Promise.reject(res.statusText)
-    }
-  }
+   _checkRequest(res) {
+      if (res.ok) {
+         return res.json()
+      }
+      else {
+         return Promise.reject(res.statusText)
+      }
+   }
 
    getProfile() {
       return fetch(`${this._baseUrl}/users/me`, {
          headers: this._headers
       })
-        .then(this._checkRequest)
+         .then(this._checkRequest)
    }
 
    getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
          headers: this._headers
       })
-        .then(this._checkRequest)
+         .then(this._checkRequest)
    }
 
 
@@ -38,18 +38,18 @@ export class Api {
             about
          })
       })
-        .then(this._checkRequest)
+         .then(this._checkRequest)
    }
 
    editAvatar(avatar) {
-		return fetch(`${this._baseUrl}/users/me/avatar`, {
-			method:  "PATCH",
-			headers: this._headers,
-			body: JSON.stringify( avatar )
-		})
-      .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
-	}
+      return fetch(`${this._baseUrl}/users/me/avatar`, {
+         method: "PATCH",
+         headers: this._headers,
+         body: JSON.stringify(avatar)
+      })
+         .then(this._checkRequest)
+
+   }
 
    addCard(name, link) {
       return fetch(`${this._baseUrl}/cards`, {
@@ -68,7 +68,7 @@ export class Api {
          method: "DELETE",
          headers: this._headers
       })
-        .then(this._checkRequest)
+         .then(this._checkRequest)
 
    }
 
@@ -86,8 +86,8 @@ export class Api {
          method: "PUT",
          headers: this._headers
       })
-        .then(this._checkRequest)
-        .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
+         .then(this._checkRequest)
+
    }
 }
 

@@ -29,7 +29,7 @@ api.getInitialCards()
             userId: userId,
             ownerId: data.owner._id
          }
-         cardSection.addItem(createCard(item))
+         cardSection.addInitialCards(createCard(item))
       })
 
    })
@@ -81,17 +81,17 @@ const avatarButton = document.querySelector('.profile__icon')
 /*----Заполнение формы профиля----*/
 const popupProfile = new PopupWithForm(profilePopup,
    (data) => {
-     popupProfile.renderLoading(true)
+      popupProfile.renderLoading(true)
       const { name, job } = data
       api.editProfile(name, job)
          .then(res => {
             userInfo.setUserInfo(name, job);
             popupProfile.close();
          })
-        .catch(console.log)
-        .finally(() => {
-          popupTypeAvatar.renderLoading(false)
-        })
+         .catch(console.log)
+         .finally(() => {
+            popupTypeAvatar.renderLoading(false)
+         })
    }
 )
 
@@ -111,7 +111,7 @@ profilePopupOpen.addEventListener('click', () => {// открыть профил
 const popupAdd = new PopupWithForm(
    addCardPopup,
    (data) => {
-     popupAdd.renderLoading(true)
+      popupAdd.renderLoading(true)
       api.addCard(data.name, data.link)
          .then(res => {
             const item = {
@@ -125,10 +125,10 @@ const popupAdd = new PopupWithForm(
             cardSection.addItem(createCard(item));
             popupAdd.close()
          })
-        .catch(console.log)
-        .finally(() => {
-          popupAdd.renderLoading(false)
-        })
+         .catch(console.log)
+         .finally(() => {
+            popupAdd.renderLoading(false)
+         })
    }
 )
 
@@ -150,7 +150,7 @@ openPopupImage.setEventListeners();
 const cardSection = new Section({
    items: [],
    renderer: (item) => {
-      cardSection.addItem(createCard(item))
+      cardSection.addInitialCards(createCard(item))
    },
 },
    '.card__list')

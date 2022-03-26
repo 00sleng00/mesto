@@ -55,7 +55,7 @@ export class Card {
       if (this.isLike()) {
          this._putLike()
       } else {
-        this._removeLike()
+         this._removeLike()
       }
    }
 
@@ -64,9 +64,9 @@ export class Card {
       this._likeBtn.classList.add('card__like_active')
    };
 
-  _removeLike() {// поставить и удалить лайк
-    this._likeBtn.classList.remove('card__like_active')
-  };
+   _removeLike() {// поставить и удалить лайк
+      this._likeBtn.classList.remove('card__like_active')
+   };
 
    _setEventListeners() {
 

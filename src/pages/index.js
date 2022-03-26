@@ -54,9 +54,10 @@ const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
 const avatarFormValidator = new FormValidator(validationConfig, formEditAvatar);
 
 
-avatarFormValidator.enableValidation();
+
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 editFormValidator.clearForm();
 
@@ -174,8 +175,8 @@ const popupTypeAvatar = new PopupWithForm(popupAvatar,
 popupTypeAvatar.setEventListeners()
 
 avatarButton.addEventListener('click', () => {
-   avatarFormValidator.clearForm();
    popupTypeAvatar.open()
+   avatarFormValidator.clearForm();
 });
 
 

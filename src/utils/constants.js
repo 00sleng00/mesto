@@ -1,6 +1,6 @@
-export const photoPopup = document.querySelector('.popup_type_photo');// Попап фото
-export const photoImg = photoPopup.querySelector('.popup__photo-img');
-export const photoCaption = photoPopup.querySelector('.popup__photo-caption');
+export const photoPopupSelector = '.popup_type_photo';// Попап фото
+export const photoImgSelector =  '.popup__photo-img';
+export const photoCaptionSelector =  '.popup__photo-caption';
 
 /*-----------------Фото-------------*/
 

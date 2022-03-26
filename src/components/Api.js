@@ -1,24 +1,31 @@
-class Api {
+export class Api {
    constructor({ baseUrl, headers }) {
       this._headers = headers
       this._baseUrl = baseUrl
       // тело конструктора
    }
 
+  _checkRequest(res) {
+    if (res.ok) {
+      return res.json()
+    }
+    else {
+      return Promise.reject(res.statusText)
+    }
+  }
+
    getProfile() {
       return fetch(`${this._baseUrl}/users/me`, {
          headers: this._headers
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+        .then(this._checkRequest)
    }
 
    getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
          headers: this._headers
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+        .then(this._checkRequest)
    }
 
 
@@ -31,8 +38,7 @@ class Api {
             about
          })
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+        .then(this._checkRequest)
    }
 
    editAvatar(avatar) {
@@ -41,8 +47,8 @@ class Api {
 			headers: this._headers,
 			body: JSON.stringify( avatar )
 		})
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkRequest)
+      .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
 	}
 
    addCard(name, link) {
@@ -54,8 +60,7 @@ class Api {
             link
          })
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+         .then(this._checkRequest)
    }
 
    deleteCard(id) {
@@ -63,8 +68,8 @@ class Api {
          method: "DELETE",
          headers: this._headers
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+        .then(this._checkRequest)
+
    }
 
    deleteLike(id) {
@@ -72,8 +77,8 @@ class Api {
          method: "DELETE",
          headers: this._headers
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+         .then(this._checkRequest)
+
    }
 
    addLike(id) {
@@ -81,15 +86,9 @@ class Api {
          method: "PUT",
          headers: this._headers
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log)
+        .then(this._checkRequest)
+        .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
    }
 }
 
-export const api = new Api({
-   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
-   headers: {
-      authorization: '21f71f02-2b30-453e-b34c-930853c71700',
-      'Content-Type': 'application/json'
-   }
-});
+

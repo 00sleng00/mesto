@@ -15,7 +15,7 @@ export class Card {
 
    _getCard() { // действие с карточками
       this._cardElement = this._template.cloneNode(true);
-
+     this._likeCountsElement = this._cardElement.querySelector('.card__like-count')
       this._cardImage = this._cardElement.querySelector('.card__image');
       this._cardText = this._cardElement.querySelector('.card__text');
       this._deleteBtn = this._cardElement.querySelector('.card__delete');
@@ -47,9 +47,8 @@ export class Card {
 
 
    setLikes(newLikes) {
-      this._likes = newLikes
-      const likeCountsElement = this._cardElement.querySelector('.card__like-count')
-      likeCountsElement.textContent = this._likes.length
+     this._likes = newLikes
+     this._likeCountsElement.textContent = this._likes.length
 
 
       if (this.isLike()) {

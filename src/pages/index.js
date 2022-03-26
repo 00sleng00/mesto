@@ -1,53 +1,66 @@
 import { FormValidator } from '../components/FormValidator.js'
-import { initialCards, validationConfig, photoPopup, photoImg, photoCaption } from '../utils/constants.js'
+import { initialCards, validationConfig, photoPopupSelector, photoImgSelector, photoCaptionSelector } from '../utils/constants.js'
 import { Card } from '../components/Card.js';
 import '../pages/index.css';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
-import { api } from '../components/Api.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
+import UserInfo from '../components/UserInfo.js'
+import {Api} from "../components/Api";
 
 let userId
 
-api.getProfile()
-   .then(res => {
-      userInfo.setUserInfo(res.name, res.about)
-      userInfo.setAvatar(res.avatar)
-      userId = res._id
-   })
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
+  headers: {
+    authorization: '21f71f02-2b30-453e-b34c-930853c71700',
+    'Content-Type': 'application/json'
+  }
+})
 
 
-api.getInitialCards()
-   .then(cardList => {
-      cardList.forEach(data => {
-         const item = {
-            name: data.name,
-            link: data.link,
-            likes: data.likes,
-            id: data._id,
-            userId: userId,
-            ownerId: data.owner._id
-         }
-         cardSection.addInitialCards(createCard(item))
-      })
+//запрос данных профайла с сервера
+const getUserInfo = api.getProfile()
 
-   })
+//запрос данных карточек с сервера
+const getCards = api.getInitialCards()
+
+Promise.all([getUserInfo, getCards])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData.name, userData.about)
+    userInfo.setAvatar(userData.avatar)
+    userId = userData._id
+
+    cards.forEach(data => {
+      const item = {
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id
+      }
+      cardSection.addInitialCards(createCard(item))
+    })
+  })
+  .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
 
 
 /*-------------Popup-----------------*/
-const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
-const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
-const deleteConfirmPopup = document.querySelector('.popup_type_delete-confirm'); // Попап подтверждение удаления
-const popupAvatar = document.querySelector('.popup_type-avatar');
+const profilePopupSelector = '.popup_type-edit';// Попап профиль
+const addCardPopupSelector = '.popup_type_add-card';// Попап карточек
+const deleteConfirmPopupSelector = '.popup_type_delete-confirm'; // Попап подтверждение удаления
+const popupAvatarSelector = '.popup_type-avatar';
 
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль
 const cardAddButton = document.querySelector('.profile__info-add-button');// открытие карточек
 
-const editForm = profilePopup.querySelector('.popup__form');// профиль
-const addCardForm = addCardPopup.querySelector('.popup__form');// карточки
-const formEditAvatar = popupAvatar.querySelector('.popup__form');
+
+const editForm = document.querySelector(profilePopupSelector + ' .popup__form');// профиль
+const addCardForm = document.querySelector(addCardPopupSelector + ' .popup__form');// карточки
+const formEditAvatar = document.querySelector(popupAvatarSelector + ' .popup__form');
 
 const editFormValidator = new FormValidator(validationConfig, editForm);
 const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
@@ -70,7 +83,7 @@ const jobInput = document.querySelector('.popup__field_input_job');
 
 // Темплейт
 const cardTemplateSelector = '.card__template'
-const openPopupImage = new PopupWithImage(photoPopup, photoImg, photoCaption)
+const openPopupImage = new PopupWithImage(photoPopupSelector, photoImgSelector, photoCaptionSelector)
 
 const avatarProfile = document.querySelector('.profile__avatar')
 
@@ -80,7 +93,7 @@ const userInfo = new UserInfo({ profileName: nameFrom, profileDescription: jobFr
 const avatarButton = document.querySelector('.profile__icon')
 
 /*----Заполнение формы профиля----*/
-const popupProfile = new PopupWithForm(profilePopup,
+const popupProfile = new PopupWithForm(profilePopupSelector,
    (data) => {
       popupProfile.renderLoading(true)
       const { name, job } = data
@@ -89,7 +102,7 @@ const popupProfile = new PopupWithForm(profilePopup,
             userInfo.setUserInfo(name, job);
             popupProfile.close();
          })
-         .catch(console.log)
+        .catch(err => console.log(`Ошибка сохранения: ${err}`))
          .finally(() => {
             popupTypeAvatar.renderLoading(false)
          })
@@ -110,7 +123,7 @@ profilePopupOpen.addEventListener('click', () => {// открыть профил
 
 /*----Заполнение формы карточки----*/
 const popupAdd = new PopupWithForm(
-   addCardPopup,
+   addCardPopupSelector,
    (data) => {
       popupAdd.renderLoading(true)
       api.addCard(data.name, data.link)
@@ -126,7 +139,7 @@ const popupAdd = new PopupWithForm(
             cardSection.addItem(createCard(item));
             popupAdd.close()
          })
-         .catch(console.log)
+        .catch(err => console.log(`Ошибка сохранения: ${err}`))
          .finally(() => {
             popupAdd.renderLoading(false)
          })
@@ -136,7 +149,7 @@ const popupAdd = new PopupWithForm(
 popupAdd.setEventListeners()
 
 
-const confirmPopup = new PopupWithForm(deleteConfirmPopup)
+const confirmPopup = new PopupWithSubmit(deleteConfirmPopupSelector, '.popup__input-save')
 confirmPopup.setEventListeners()
 
 
@@ -158,7 +171,7 @@ const cardSection = new Section({
 
 
 // ! Аватарка
-const popupTypeAvatar = new PopupWithForm(popupAvatar,
+const popupTypeAvatar = new PopupWithForm(popupAvatarSelector,
    (avatar) => {
       popupTypeAvatar.renderLoading(true)
       api.editAvatar(avatar)
@@ -166,7 +179,7 @@ const popupTypeAvatar = new PopupWithForm(popupAvatar,
             userInfo.setAvatar(res.avatar)
             popupTypeAvatar.close()
          })
-         .catch(console.log)
+        .catch(err => console.log(`Ошибка сохранения аватарки: ${err}`))
          .finally(() => {
             popupTypeAvatar.renderLoading(false)
          })
@@ -195,6 +208,7 @@ function createCard(cardData) {
                   card.deleteCard()
                   confirmPopup.close()
                })
+              .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
          })
       },
       (id) => {
@@ -202,12 +216,14 @@ function createCard(cardData) {
             api.deleteLike(id)
                .then(res => {
                   card.setLikes(res.likes)
-               });
+               })
+         .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
          } else {
             api.addLike(id)
                .then(res => {
                   card.setLikes(res.likes)
-               });
+               })
+         .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
          }
 
       },
@@ -216,6 +232,9 @@ function createCard(cardData) {
 
    return cardElement
 }
+
+
+
 
 // Реализания карточек
 cardSection.setItems()

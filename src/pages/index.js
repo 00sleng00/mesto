@@ -39,7 +39,7 @@ api.getInitialCards()
 const profilePopup = document.querySelector('.popup_type-edit');// Попап профиль
 const addCardPopup = document.querySelector('.popup_type_add-card');// Попап карточек
 const deleteConfirmPopup = document.querySelector('.popup_type_delete-confirm'); // Попап подтверждение удаления
-const popupAvatar = document.querySelector('.popup__avatar');
+const popupAvatar = document.querySelector('.popup_type-avatar');
 
 
 const profilePopupOpen = document.querySelector('.profile__info-edit-button');// открыть профиль

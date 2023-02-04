@@ -6,7 +6,7 @@
 ---
 ## *Описание*
 ----
-<p align="center"><a href="https://00sleng00.github.io/mesto/"><img src="https://im.wampi.ru/2023/02/04/SNIMOK-EKRANA-2023-02-04-194402.png" alt="SNIMOK-EKRANA-2023-02-04-194402.png" border="0"></a></p>
+<p align="center"> <a href="https://00sleng00.github.io/mesto/"><img src="https://ic.wampi.ru/2023/02/04/SNIMOK-EKRANA-2023-02-04-195450.png" alt="SNIMOK-EKRANA-2023-02-04-195450.png" border="0"></a> </p>
 
 ### ***О чём проект?***
 
